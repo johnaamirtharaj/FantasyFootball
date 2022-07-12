@@ -9,7 +9,7 @@ def lambda_handler(event, context):
 
     userid = event["userid"]
    
-    
+    usertype = 'value1'
     
     dynamodb = boto3.resource(
         'dynamodb', endpoint_url="https://dynamodb.us-east-1.amazonaws.com")
@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     users_table = dynamodb.Table('Users')
     try:
         response = users_table.get_item(
-            Key={'userid': userid,'usertype':'value1'})
+            Key={'userid': userid,'usertype':usertype})
     except ClientError as e:
         print(e.response['Error']['Message'])
     else:
