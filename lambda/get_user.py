@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     users_table = dynamodb.Table('Users')
     try:
         response = users_table.get_item(
-            Key={'userid': userid})
+            Key={'userid': userid,'usertype':'value1'})
     except ClientError as e:
         print(e.response['Error']['Message'])
     else:
