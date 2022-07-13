@@ -8,6 +8,10 @@ def lambda_handler(event, context):
     # TODO implement
     #exports.handler = async (event) => {
     print("Received event ",event)
+    dynamodb = boto3.resource(
+        'dynamodb', endpoint_url="https://dynamodb.us-east-1.amazonaws.com")
+    # Specify the table
+    users_table = dynamodb.Table('Users')  
     for i in event['Records']:
         print(i)
         print(i["kinesis"]["data"])
@@ -23,11 +27,7 @@ def lambda_handler(event, context):
 		uname = event["uname"]
 		point = event["point"]
 		
-		
-		dynamodb = boto3.resource(
-			'dynamodb', endpoint_url="https://dynamodb.us-east-1.amazonaws.com")
-		# Specify the table
-		users_table = dynamodb.Table('Users')
+
 		response = users_table.put_item(
 			# Data to be inserted
 			Item={
